@@ -9,10 +9,12 @@
 /**
  * @namespace
  */
+
 namespace Yandex\Common;
 
 /**
  * Class ObjectModel
+ *
  * @package Yandex\Common
  */
 class ObjectModel extends Model implements \Iterator, \Countable
@@ -20,6 +22,10 @@ class ObjectModel extends Model implements \Iterator, \Countable
     protected $collection = [];
     protected $innerCounter = -1;
 
+    /**
+     * @return false|mixed|ObjectModel
+     */
+    #[\ReturnTypeWillChange]
     public function current()
     {
         if (is_array(current($this->collection))) {
@@ -29,22 +35,26 @@ class ObjectModel extends Model implements \Iterator, \Countable
         return current($this->collection);
     }
 
+    #[\ReturnTypeWillChange]
     public function next()
     {
         $this->innerCounter++;
         return next($this->collection);
     }
 
+    #[\ReturnTypeWillChange]
     public function key()
     {
         return key($this->collection);
     }
 
+    #[\ReturnTypeWillChange]
     public function valid()
     {
         return $this->innerCounter < count($this->collection);
     }
 
+    #[\ReturnTypeWillChange]
     public function rewind()
     {
         $this->innerCounter = 0;
@@ -52,6 +62,7 @@ class ObjectModel extends Model implements \Iterator, \Countable
         return;
     }
 
+    #[\ReturnTypeWillChange]
     public function count()
     {
         return count($this->collection);
